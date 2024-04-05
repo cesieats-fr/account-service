@@ -28,5 +28,11 @@ pipeline {
                 sh "ssh cluster@192.168.2.30 'export IMAGE_VERSION=${BUILD_ID} && envsubst < k8s-account-service.yml | kubectl apply -f -'"
             }
         }
+
+         stage("Discord Webhook") {
+            steps {
+                discordSend description: '', enableArtifactsList: true, footer: '', image: '', link: 'https://github.com/cesieats-fr/account-service', result: 'done', scmWebUrl: '', showChangeset: true, thumbnail: '', title: 'account-service', webhookURL: 'https://discord.com/api/webhooks/1225727451636957194/OHdKttdUjBduUFfmIloYHF4tP2IUriROjCusJBdZP0ByA83KG4Ls592Lvu6C2DCEvvNT'
+            }
+        }
     }
 }

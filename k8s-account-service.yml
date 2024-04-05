@@ -36,5 +36,5 @@ spec:
     - name: http
       protocol: TCP
       port: 3000
-      nodePort: 30199
+      nodePort: 30102
   type: NodePort
