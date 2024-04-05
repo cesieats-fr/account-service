@@ -1,12 +1,12 @@
 import express, { Request, Response } from 'express';
 import 'dotenv/config';
-import router from './routers';
+import router from './router';
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('Bienvenue sur l api de CesiEats ! Je suis Keanu Nicolas Harrell !');
+  res.send('account-service running');
 });
 
 app.use('/', router);
