@@ -1,9 +1,12 @@
 import express, { Request, Response } from 'express';
 import 'dotenv/config';
 import router from './routers';
+import { connectMongoose } from './database';
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+connectMongoose();
 
 app.get('/', (req: Request, res: Response) => {
   res.send('account-service running');

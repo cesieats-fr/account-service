@@ -17,6 +17,17 @@ spec:
       containers:
         - name: account-service
           image: kilme/account-service:$IMAGE_VERSION
+          env:
+          - name: DB_USERNAME
+            valueFrom: 
+              secretKeyRef:
+                name: mongo-creds
+                key: username
+          - name: DB_PASSWORD
+            valueFrom: 
+              secretKeyRef:
+                name: mongo-creds
+                key: password
           resources:
             limits:
               memory: "512Mi"
