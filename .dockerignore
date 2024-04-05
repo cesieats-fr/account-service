@@ -1,0 +1,14 @@
+# Dossiers à ignorer
+node_modules/
+dist/
+
+# Fichiers à ignorer
+.DS_Store
+
+.git
+.gitignore
+
+k8s-service-template.yml
+
+.eslintsrc
+.prettierrc
