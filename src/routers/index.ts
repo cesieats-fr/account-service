@@ -1,21 +1,14 @@
 import express, { Router, Request, Response } from 'express';
+import controller from '../controllers';
 
 const router: Router = express.Router();
 
-router.post('/register', (req: Request, res: Response) => {
-  res.send('Hello, world!');
-});
+router.post('/registerAccount', controller.register);
 
-router.post('/login', (req: Request, res: Response) => {
-  res.json('login');
-});
+router.post('/loginAccount',controller.login);
 
-router.delete('/delete/{id}', (req: Request, res: Response) => {
-  res.json('delete');
-});
+router.delete('/deleteAccount/{idAccount}',controller.deleteAccount);
 
-router.put('/edit/{id}', (req: Request, res: Response) => {
-  res.json('edit');
-});
+router.put('/editAccount/{idAccount}', controller.deleteAccount);
 
 export default router;
