@@ -3,9 +3,9 @@ import controller from '../controllers';
 
 const router: Router = express.Router();
 
-router.post('/registerAccount', controller.register);
+router.post('/registerAccount', controller.registerAccount);
 
-router.post('/loginAccount',controller.login);
+router.post('/loginAccount',controller.loginAccount);
 
 router.delete('/deleteAccount/{idAccount}',controller.deleteAccount);
 
