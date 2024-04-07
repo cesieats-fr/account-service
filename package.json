@@ -23,6 +23,7 @@
     "@typescript-eslint/eslint-plugin": "^6.19.0",
     "@typescript-eslint/parser": "^6.19.0",
     "amqplib": "^0.10.3",
+    "cesieats-service-types": "^1.0.18",
     "dotenv": "^16.4.5",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
@@ -34,8 +35,5 @@
     "prettier": "^3.2.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
-  },
-  "dependencies": {
-    "cesieats-service-types": "^1.0.18"
   }
 }
