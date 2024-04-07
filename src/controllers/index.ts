@@ -1,20 +1,60 @@
 import { Request, Response } from 'express';
+import { IAccount } from 'cesieats-service-types/src/account';
+import { Account } from '../database';
 
-const register = (req: Request, res: Response) => {
-  res.status(200).json({ message: 'Hello, world!' });
+//Crée un compte
+const registerAccount = async (req: Request, res: Response) => {
+  try {
+    const acc: IAccount = {
+      forname: req.body.forname,
+      name: req.body.name,
+      idIdentity: res.locals.identity
+    };
+    const result = await Account.create(acc);
+
+    res.status(200).json('Account succesfully created');
+  } catch (error) {
+    console.log('[IDENTITY-SERVICE] registerAccount error: ', error);
+    res.status(400).json({ message: 'an unexpected error occurred' });
+  }
 };
 
-const login = (req: Request, res: Response) => {
-  res.status(200).json({ message: 'Hello, world!' });
+//Connecte un compte
+const loginAccount = async (req: Request, res: Response) => {
+  try {
+    const result = await Account.findOne({idIdentity: res.locals.identity});
+
+    if(!result) {
+      res.status(404).json({ message: 'idIdentity not found or incorrect' });
+    }
+
+    res.status(200).json('Account succesfully logged');
+
+  } catch (error) {
+    console.log('[IDENTITY-SERVICE] loginAccount error: ', error);
+    res.status(400).json({ message: 'an unexpected error occurred' });
+  }
 };
 
-const deleteAccount = (req: Request, res: Response) => {
-  res.status(200).json({ message: 'Hello, world!' });
+//Supprime un compte
+const deleteAccount = async (req: Request, res: Response) => {
+  try {
+    const result = await Account.deleteOne({idIdentity: res.locals.identity});
+
+    if(!result) {
+      res.status(404).json({ message: 'account not found' });
+    }
+
+    res.status(200).json('Account succesfully deleted!');
+  } catch (error) {
+    console.log('[IDENTITY-SERVICE] deleteAccount error: ', error);
+    res.status(400).json({ message: 'an unexpected error occurred' });
+  }
 };
 
 const controller = {
-  register,
-  login,
+  registerAccount,
+  loginAccount,
   deleteAccount,
 };
 
