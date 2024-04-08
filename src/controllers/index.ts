@@ -8,11 +8,11 @@ const registerAccount = async (req: Request, res: Response) => {
     const acc: IAccount = {
       forname: req.body.forname,
       name: req.body.name,
-      idIdentity: res.locals.identity
+      idIdentity: res.locals.identity,
     };
     const result = await Account.create(acc);
 
-    res.status(200).json('Account succesfully created');
+    res.status(200).json(result);
   } catch (error) {
     console.log('[IDENTITY-SERVICE] registerAccount error: ', error);
     res.status(400).json({ message: 'an unexpected error occurred' });
@@ -22,14 +22,13 @@ const registerAccount = async (req: Request, res: Response) => {
 //Connecte un compte
 const loginAccount = async (req: Request, res: Response) => {
   try {
-    const result = await Account.findOne({idIdentity: res.locals.identity});
+    const result = await Account.findOne({ idIdentity: res.locals.identity._id });
 
-    if(!result) {
+    if (!result) {
       res.status(404).json({ message: 'idIdentity not found or incorrect' });
     }
 
     res.status(200).json('Account succesfully logged');
-
   } catch (error) {
     console.log('[IDENTITY-SERVICE] loginAccount error: ', error);
     res.status(400).json({ message: 'an unexpected error occurred' });
@@ -39,9 +38,9 @@ const loginAccount = async (req: Request, res: Response) => {
 //Supprime un compte
 const deleteAccount = async (req: Request, res: Response) => {
   try {
-    const result = await Account.deleteOne({idIdentity: res.locals.identity});
+    const result = await Account.deleteOne({ idIdentity: res.locals.identity });
 
-    if(!result) {
+    if (!result) {
       res.status(404).json({ message: 'account not found' });
     }
 
