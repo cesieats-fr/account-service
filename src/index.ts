@@ -7,7 +7,7 @@ import { connectRabbitMQ } from './messaging';
 const app = express();
 const port = process.env.PORT || 3000;
 app.use(express.json());
-
+//test
 Promise.all([connectRabbitMQ(), connectMongoose()]).then(() => {
   app.get('/', (req: Request, res: Response) => {
     res.send('account-service running');
