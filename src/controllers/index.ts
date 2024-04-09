@@ -40,6 +40,9 @@ const login = async (req: Request, res: Response) => {
       return res.status(404).json({ message: 'email/password not found or incorrect' });
     }
 
+    console.log('JWT: ', process.env.JWT_KEY);
+    console.log('env: ', process.env);
+
     const token = jwt.sign(result, process.env.JWT_KEY!);
 
     res.status(200).json({
