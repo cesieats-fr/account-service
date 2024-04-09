@@ -117,12 +117,12 @@ const verifyApiKey = async (req: Request, res: Response) => {
 };
 
 const controller = {
-  registerAccount: register,
-  loginAccount: login,
+  register,
+  login,
   deleteAccount,
-  editAccount: edit,
-  createApiKeyIdentity: createApiKey,
-  verifyApiKeyIdentity: verifyApiKey,
+  edit,
+  createApiKey,
+  verifyApiKey,
 };
 
 export default controller;
