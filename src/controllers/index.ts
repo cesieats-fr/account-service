@@ -34,12 +34,9 @@ const register = async (req: Request, res: Response) => {
 //Connecte un compte
 const login = async (req: Request, res: Response) => {
   try {
-    console.log(req.body);
-
     const result = await Account.findOne({ email: req.body.email, password: req.body.password });
 
-    console.log(result);
-    if (!result) {
+    if (result === null) {
       return res.status(404).json({ message: 'email/password not found or incorrect' });
     }
 

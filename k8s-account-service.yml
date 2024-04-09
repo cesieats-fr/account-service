@@ -48,6 +48,16 @@ spec:
               secretKeyRef:
                 name: rabbitmq-credentials-secret
                 key: password
+          - name: JWT_KEY
+            valueFrom: 
+              secretKeyRef:
+                name: default-credentials-secret
+                key: jwt-key
+          - name: BASE64_KEY
+            valueFrom: 
+              secretKeyRef:
+                name: default-credentials-secret
+                key: base64-key
           resources:
             limits:
               memory: "512Mi"
