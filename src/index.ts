@@ -1,10 +1,11 @@
 import express, { Request, Response } from 'express';
+import cors from 'cors';
 import 'dotenv/config';
 import router from './routers';
 import { connectMongoose } from './database';
 import { connectRabbitMQ } from './messaging';
 
-const app = express();
+const app = express().use('*', cors());
 const port = process.env.PORT || 3000;
 app.use(express.json());
 //test
