@@ -35,6 +35,8 @@ const register = async (req: Request, res: Response) => {
 //Connecte un compte
 const login = async (req: Request, res: Response) => {
   try {
+    console.log('req: ', req);
+    console.log('req.body: ', req.body);
     const tokenClient = req.header('Authorization')?.replace('Bearer ', '');
 
     console.log('tokenClient: ', tokenClient);
