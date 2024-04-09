@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { IAccount } from 'cesieats-service-types/src/account';
 import { Account } from '../database';
+import jwt from 'jsonwebtoken';
 
 //Crée un compte
 const register = async (req: Request, res: Response) => {
@@ -13,7 +14,12 @@ const register = async (req: Request, res: Response) => {
     };
     const result = await Account.create(acc);
 
-    res.status(200).json(result);
+    const token = jwt.sign(result, process.env.JWT_KEY!);
+
+    res.status(200).json({
+      token: token,
+      account: result,
+    });
   } catch (error) {
     res.status(400).json({ message: 'an unexpected error occurred', error });
   }
@@ -24,11 +30,16 @@ const login = async (req: Request, res: Response) => {
   try {
     const result = await Account.findOne({ email: req.body.email, password: req.body.password });
 
-    if (!result || res.locals.identity._id !== result._id) {
-      return res.status(404).json({ message: 'idIdentity not found or incorrect' });
+    if (!result) {
+      return res.status(404).json({ message: 'email/password not found or incorrect' });
     }
 
-    res.status(200).json('Account succesfully logged');
+    const token = jwt.sign(result, process.env.JWT_KEY!);
+
+    res.status(200).json({
+      token: token,
+      account: result,
+    });
   } catch (error) {
     res.status(400).json({ message: 'an unexpected error occurred', error });
   }
@@ -51,8 +62,7 @@ const deleteAccount = async (req: Request, res: Response) => {
 
 const edit = async (req: Request, res: Response) => {
   try {
-    const update: IAccount = {
-      email: req.body.email,
+    const update = {
       password: req.body.password,
       forname: req.body.forname,
       name: req.body.name,
