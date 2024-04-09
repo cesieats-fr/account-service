@@ -35,6 +35,13 @@ const register = async (req: Request, res: Response) => {
 //Connecte un compte
 const login = async (req: Request, res: Response) => {
   try {
+    const tokenClient = req.header('Authorization')?.replace('Bearer ', '');
+
+    if (tokenClient) {
+      const account = jwt.verify(tokenClient!, process.env.JWT_KEY!);
+      return res.status(200).json({ token: tokenClient, account });
+    }
+
     const result = await Account.findOne({ email: req.body.email, password: req.body.password });
 
     if (result === null) {
