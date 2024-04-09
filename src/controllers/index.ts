@@ -54,7 +54,7 @@ const login = async (req: Request, res: Response) => {
 //Supprime un compte
 const deleteAccount = async (req: Request, res: Response) => {
   try {
-    const result = await Account.deleteOne({ idIdentity: res.locals.identity._id });
+    const result = await Account.findByIdAndDelete(res.locals.account._id);
 
     if (!result) {
       return res.status(404).json({ message: 'account not found' });
@@ -74,7 +74,7 @@ const edit = async (req: Request, res: Response) => {
       name: req.body.name,
       address: req.body.address,
     };
-    const result = await Account.findOneAndUpdate({ idIdentity: res.locals.identity._id }, update);
+    const result = await Account.findByIdAndUpdate(res.locals.account._id, update);
 
     if (!result) {
       return res.status(404).json({ message: 'account not found' });
@@ -93,7 +93,7 @@ const createApiKey = async (req: Request, res: Response) => {
     while ((await Account.find({ apiKey: apiKey })) != null) {
       apiKey = crypto.randomUUID();
     }
-    await Account.findOneAndUpdate({ email: res.locals.identity.email }, { apiKey: apiKey });
+    await Account.findByIdAndUpdate(res.locals.account._id, { apiKey: apiKey });
     res.status(200).json(apiKey);
   } catch (error) {
     res.status(400).json({ message: 'an unexpected error occurred' });
@@ -103,7 +103,7 @@ const createApiKey = async (req: Request, res: Response) => {
 //Vérifie la clé API d'une identité
 const verifyApiKey = async (req: Request, res: Response) => {
   try {
-    if (Account.find({ apiKey: res.locals.identity.apiKey }) != null) {
+    if (Account.find({ apiKey: res.locals.account.apiKey }) != null) {
       res.status(200).json();
     } else {
       res.status(401).json({ message: 'apiKey could not be verified' });

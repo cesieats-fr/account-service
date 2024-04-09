@@ -9,7 +9,7 @@ export const middleware: RequestHandler = (req: Request, res: Response, next: Ne
   jwt.verify(token, process.env.JWT_KEY!, (err, decoded) => {
     if (err) return res.status(401).json({ message: 'Unauthorized' });
 
-    res.locals.identity = decoded;
+    res.locals.account = decoded;
     next();
   });
 };
