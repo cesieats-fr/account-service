@@ -44,12 +44,12 @@ spec:
                 name: rabbitmq-credentials
                 key: services-url
           - name: RABBITMQ_PASSWORD
-            valueFrom: 
+            valueFrom:
               secretKeyRef:
                 name: rabbitmq-credentials-secret
                 key: password
           - name: JWT_KEY
-            valueFrom: 
+            valueFrom:
               secretKeyRef:
                 name: default-credentials-secret
                 key: jwt-key
