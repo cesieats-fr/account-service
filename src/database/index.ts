@@ -6,6 +6,7 @@ export const accountSchema = new Schema<IAccount>({
   password: { type: String, required: true },
   name: { type: String, required: true },
   forname: { type: String, required: true },
+  accountType: { type: Number, required: true },
   address: { type: String, required: false },
   apiKey: { type: String, required: false },
 });
