@@ -6,6 +6,12 @@ import jwt from 'jsonwebtoken';
 //Crée un compte
 const register = async (req: Request, res: Response) => {
   try {
+    //Vérifie si l'email est déjà utilisé
+    const email = await Account.findOne({ email: req.body.email });
+    if (email) {
+      return res.status(409).json({ message: 'email already used' });
+    }
+
     const acc: IAccount = {
       email: req.body.email,
       password: req.body.password,
