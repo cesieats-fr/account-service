@@ -2,9 +2,12 @@ import { IAccount } from 'cesieats-service-types/src/account';
 import mongoose, { Schema, model } from 'mongoose';
 
 export const accountSchema = new Schema<IAccount>({
+  email: { type: String, required: true },
+  password: { type: String, required: true },
   name: { type: String, required: true },
   forname: { type: String, required: true },
-  idIdentity: { type: String, required: true },
+  address: { type: String, required: false },
+  apiKey: { type: String, required: false },
 });
 
 export const Account = model<IAccount>('Account', accountSchema);

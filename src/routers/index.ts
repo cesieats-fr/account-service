@@ -1,14 +1,21 @@
 import express, { Router } from 'express';
 import controller from '../controllers';
+import { middleware } from '../middlewares';
 
 const router: Router = express.Router();
 
-router.post('/registerAccount', controller.registerAccount);
+router.post('/register', controller.registerAccount);
 
-router.post('/loginAccount',controller.loginAccount);
+router.post('/login', controller.loginAccount);
 
-router.delete('/deleteAccount/{idAccount}',controller.deleteAccount);
+router.use(middleware);
 
-router.put('/editAccount/{idAccount}', controller.deleteAccount);
+router.delete('/delete', controller.deleteAccount);
+
+router.put('/edit', controller.editAccount);
+
+router.post('/createApiKey', controller.createApiKeyIdentity);
+
+router.post('/verifyApiKey', controller.verifyApiKeyIdentity);
 
 export default router;

@@ -24,7 +24,7 @@
     "@typescript-eslint/eslint-plugin": "^6.19.0",
     "@typescript-eslint/parser": "^6.19.0",
     "amqplib": "^0.10.3",
-    "cesieats-service-types": "^1.0.18",
+    "cesieats-service-types": "^1.0.23",
     "dotenv": "^16.4.5",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
