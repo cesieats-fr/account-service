@@ -34,6 +34,7 @@ const register = async (req: Request, res: Response) => {
 
 //Connecte un compte
 const login = async (req: Request, res: Response) => {
+  console.log('login');
   try {
     console.log('req: ', req);
     console.log('req.body: ', req.body);
