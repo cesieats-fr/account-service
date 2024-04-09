@@ -20,7 +20,7 @@ const register = async (req: Request, res: Response) => {
     };
     const result = await Account.create(acc);
 
-    const token = jwt.sign(result, process.env.JWT_KEY!);
+    const token = jwt.sign(result.toJSON(), process.env.JWT_KEY!);
 
     res.status(200).json({
       token: token,
@@ -40,21 +40,13 @@ const login = async (req: Request, res: Response) => {
       return res.status(404).json({ message: 'email/password not found or incorrect' });
     }
 
-    console.log('result: ', result);
-
-    console.log('JWT: ', process.env.JWT_KEY);
-    console.log('env: ', process.env);
-
-    const token = jwt.sign(result, process.env.JWT_KEY!);
-
-    console.log('token: ', token);
+    const token = jwt.sign(result.toJSON(), process.env.JWT_KEY!);
 
     res.status(200).json({
       token: token,
       account: result,
     });
   } catch (error) {
-    console.log(error);
     res.status(400).json({ message: 'an unexpected error occurred', error });
   }
 };
