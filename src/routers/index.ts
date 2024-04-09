@@ -9,6 +9,7 @@ router.post('/login', controller.login);
 
 router.use(middleware);
 
+router.post('/loginWithToken', controller.loginWithToken);
 router.delete('/delete', controller.deleteAccount);
 router.put('/edit', controller.edit);
 router.post('/createApiKey', controller.createApiKey);

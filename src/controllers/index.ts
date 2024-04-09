@@ -34,20 +34,7 @@ const register = async (req: Request, res: Response) => {
 
 //Connecte un compte
 const login = async (req: Request, res: Response) => {
-  console.log('login');
   try {
-    console.log('req: ', req);
-    console.log('req.body: ', req.body);
-    const tokenClient = req.header('Authorization')?.replace('Bearer ', '');
-
-    console.log('tokenClient: ', tokenClient);
-
-    if (tokenClient) {
-      const account = jwt.verify(tokenClient!, process.env.JWT_KEY!);
-      console.log('account: ', account);
-      return res.status(200).json({ token: tokenClient, account });
-    }
-
     const result = await Account.findOne({ email: req.body.email, password: req.body.password });
 
     if (result === null) {
@@ -63,6 +50,10 @@ const login = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(400).json({ message: 'an unexpected error occurred', error });
   }
+};
+
+const loginWithToken = async (req: Request, res: Response) => {
+  res.status(200).json(res.locals.account);
 };
 
 //Supprime un compte
@@ -130,6 +121,7 @@ const verifyApiKey = async (req: Request, res: Response) => {
 const controller = {
   register,
   login,
+  loginWithToken,
   deleteAccount,
   edit,
   createApiKey,
