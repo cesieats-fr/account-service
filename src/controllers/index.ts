@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { IAccount } from 'cesieats-service-types/src/account';
+import { IAccount, EAccountType } from 'cesieats-service-types/src/account';
 import { Account } from '../database';
 import jwt from 'jsonwebtoken';
 
