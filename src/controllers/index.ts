@@ -54,6 +54,7 @@ const login = async (req: Request, res: Response) => {
       account: result,
     });
   } catch (error) {
+    console.log(error);
     res.status(400).json({ message: 'an unexpected error occurred', error });
   }
 };
