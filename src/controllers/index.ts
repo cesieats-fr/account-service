@@ -53,7 +53,9 @@ const login = async (req: Request, res: Response) => {
 };
 
 const loginWithToken = async (req: Request, res: Response) => {
-  res.status(200).json(res.locals.account);
+  const result = await Account.findById(res.locals.account._id);
+  if (!result) return res.status(404).json({ message: 'account not found' });
+  res.status(200).json(result);
 };
 
 //Supprime un compte
