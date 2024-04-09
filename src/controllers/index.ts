@@ -37,10 +37,11 @@ const login = async (req: Request, res: Response) => {
   try {
     const tokenClient = req.header('Authorization')?.replace('Bearer ', '');
 
-    console.log(tokenClient);
+    console.log('tokenClient: ', tokenClient);
 
     if (tokenClient) {
       const account = jwt.verify(tokenClient!, process.env.JWT_KEY!);
+      console.log('account: ', account);
       return res.status(200).json({ token: tokenClient, account });
     }
 
