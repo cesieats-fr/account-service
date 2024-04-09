@@ -12,13 +12,12 @@ const register = async (req: Request, res: Response) => {
       return res.status(409).json({ message: 'email already used' });
     }
 
-    console.log('req.body :', req.body);
-
     const acc: IAccount = {
       email: req.body.email,
       password: req.body.password,
       forname: req.body.forname,
       name: req.body.name,
+      accountType: req.body.accountType,
     };
     const result = await Account.create(acc);
 
