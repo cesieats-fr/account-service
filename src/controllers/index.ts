@@ -18,7 +18,7 @@ const register = async (req: Request, res: Response) => {
       forname: req.body.forname,
       name: req.body.name,
       accountType: req.body.accountType,
-      codeSponsor: crypto.randomUUID()
+      codeSponsor: crypto.randomUUID(),
     };
     const result = await Account.create(acc);
 
@@ -76,6 +76,8 @@ const deleteAccount = async (req: Request, res: Response) => {
 
 const edit = async (req: Request, res: Response) => {
   try {
+    console.log(req.body);
+    console.log(res.locals.account._id);
     const update = {
       password: req.body.password,
       forname: req.body.forname,
@@ -84,6 +86,7 @@ const edit = async (req: Request, res: Response) => {
     };
     const result = await Account.findByIdAndUpdate(res.locals.account._id, update);
 
+    console.log(result);
     if (!result) {
       return res.status(404).json({ message: 'account not found' });
     }
