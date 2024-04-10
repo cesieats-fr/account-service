@@ -9,6 +9,7 @@ export const accountSchema = new Schema<IAccount>({
   accountType: { type: Number, required: true },
   address: { type: String, required: false },
   apiKey: { type: String, required: false },
+  codeSponsor: {type: String, required: false },
 });
 
 export const Account = model<IAccount>('Account', accountSchema);
