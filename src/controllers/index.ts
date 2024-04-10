@@ -76,17 +76,14 @@ const deleteAccount = async (req: Request, res: Response) => {
 
 const edit = async (req: Request, res: Response) => {
   try {
-    console.log(req.body);
-    console.log(res.locals.account._id);
     const update = {
       password: req.body.password,
       forname: req.body.forname,
       name: req.body.name,
       address: req.body.address,
     };
-    const result = await Account.findByIdAndUpdate(res.locals.account._id, update);
+    const result = await Account.findByIdAndUpdate(res.locals.account._id, update, { new: true });
 
-    console.log(result);
     if (!result) {
       return res.status(404).json({ message: 'account not found' });
     }
