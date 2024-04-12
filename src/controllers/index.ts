@@ -123,7 +123,7 @@ const verifyApiKey = async (req: Request, res: Response) => {
 
 const getAllClientAccounts = async (req: Request, res: Response) => {
   try {
-    if(res.locals.account.accountType != 3) return res.status(401).json({ message: 'unauthorized' });
+    if (res.locals.account.accountType != 3) return res.status(401).json({ message: 'unauthorized' });
     const result = await Account.find({ accountType: 0 }).exec();
 
     if (!result) {
