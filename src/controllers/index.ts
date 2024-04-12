@@ -125,7 +125,7 @@ const getAllClientAccounts = async (req: Request, res: Response) => {
   try {
     if(res.locals.account.accountType != 3) return res.status(401).json({ message: 'unauthorized' });
     const result = Account.find({ accountType: 0 }).exec;
-
+    console.log(result);
     if (!result) {
       return res.status(404).json({ message: 'account not found' });
     }
