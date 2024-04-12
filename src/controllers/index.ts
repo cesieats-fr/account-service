@@ -78,7 +78,7 @@ const deleteAccount = async (req: Request, res: Response) => {
 
 const deleteAccountById = async (req: Request, res: Response) => {
   try {
-    const result = await Account.findByIdAndDelete(res.locals.account._id);
+    const result = await Account.findByIdAndDelete(req.body.idAccount);
 
     if (!result) {
       return res.status(404).json({ message: 'account not found' });
@@ -118,7 +118,8 @@ const editAccountByID = async (req: Request, res: Response) => {
       address: req.body.address,
       email : req.body.email,
     };
-    const result = await Account.findByIdAndUpdate(res.locals.account._id, update, { new: true });
+    
+    const result = await Account.findByIdAndUpdate(req.body.idAccount, update, { new: true });
 
     if (!result) {
       return res.status(404).json({ message: 'account not found' });
