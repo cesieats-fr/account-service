@@ -16,7 +16,7 @@ router.post('/createApiKey', controller.createApiKey);
 router.post('/verifyApiKey', controller.verifyApiKey);
 router.get('/getAllClientAccounts', controller.getAllClientAccounts);
 router.put('/editAccountByID', controller.editAccountByID);
-router.delete('/deleteAccount', controller.deleteAccountById);
+router.delete('/deleteAccountById', controller.deleteAccountById);
 
 
 export default router;
