@@ -15,5 +15,6 @@ router.put('/edit', controller.edit);
 router.post('/createApiKey', controller.createApiKey);
 router.post('/verifyApiKey', controller.verifyApiKey);
 router.get('/getAllClientAccounts', controller.getAllClientAccounts);
+router.put('/editAccountByID', controller.editAccountByID);
 
 export default router;

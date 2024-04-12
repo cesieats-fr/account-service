@@ -94,6 +94,26 @@ const edit = async (req: Request, res: Response) => {
   }
 };
 
+const editAccountByID = async (req: Request, res: Response) => {
+  try {
+    const update = {      
+      forname: req.body.forname,
+      name: req.body.name,
+      address: req.body.address,
+      email : req.body.email,
+    };
+    const result = await Account.findByIdAndUpdate(res.locals.account._id, update, { new: true });
+
+    if (!result) {
+      return res.status(404).json({ message: 'account not found' });
+    }
+
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(400).json({ message: 'an unexpected error occurred', error });
+  }
+};
+
 //Crée et associe une clé API à une identité connectée
 const createApiKey = async (req: Request, res: Response) => {
   try {
@@ -145,6 +165,7 @@ const controller = {
   createApiKey,
   verifyApiKey,
   getAllClientAccounts,
+  editAccountByID,
 };
 
 export default controller;
