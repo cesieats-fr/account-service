@@ -74,6 +74,20 @@ const deleteAccount = async (req: Request, res: Response) => {
   }
 };
 
+const deleteAccountById = async (req: Request, res: Response) => {
+  try {
+    const result = await Account.findByIdAndDelete(res.locals.account._id);
+
+    if (!result) {
+      return res.status(404).json({ message: 'account not found' });
+    }
+
+    res.status(200).json('Account succesfully deleted!');
+  } catch (error) {
+    res.status(400).json({ message: 'an unexpected error occurred', error });
+  }
+};
+
 const edit = async (req: Request, res: Response) => {
   try {
     const update = {
@@ -166,6 +180,7 @@ const controller = {
   verifyApiKey,
   getAllClientAccounts,
   editAccountByID,
+  deleteAccountById
 };
 
 export default controller;
