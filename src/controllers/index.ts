@@ -121,6 +121,21 @@ const verifyApiKey = async (req: Request, res: Response) => {
   }
 };
 
+const getAllClientAccounts = async (req: Request, res: Response) => {
+  try {
+    if(res.locals.account.accountType != 3) return res.status(401).json({ message: 'unauthorized' });
+    const result = Account.find({ accountType: 0 }).exec;
+
+    if (!result) {
+      return res.status(404).json({ message: 'account not found' });
+    }
+
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(400).json({ message: 'an unexpected error occurred', error });
+  }
+};
+
 const controller = {
   register,
   login,
@@ -129,6 +144,7 @@ const controller = {
   edit,
   createApiKey,
   verifyApiKey,
+  getAllClientAccounts,
 };
 
 export default controller;
