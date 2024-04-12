@@ -17,7 +17,9 @@ const register = async (req: Request, res: Response) => {
       password: req.body.password,
       forname: req.body.forname,
       name: req.body.name,
+      address: req.body.address,
       accountType: req.body.accountType,
+      
       codeSponsor: crypto.randomUUID(),
     };
     const result = await Account.create(acc);
